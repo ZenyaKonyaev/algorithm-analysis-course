@@ -1,6 +1,19 @@
 # Prerequisites
 *.d
 
+#folder from jetbrains idea
+**/.idea
+**/cmake-build-debug
+
+#tex files
+*.aux
+*.bbl
+*.blg
+*.log
+*.toc
+*.gz
+
+
 # Object files
 *.o
 *.ko
