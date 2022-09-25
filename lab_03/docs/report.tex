@@ -1,9 +1,7 @@
-\documentclass[a4paper,12pt]{report}
-
-\usepackage[english, russian]{babel}
-\usepackage{fontspec}
-\setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
-
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage[14pt]{extsizes}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} 
@@ -13,33 +11,44 @@
 \usepackage{eucal}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\frenchspacing
+
+\usepackage{indentfirst} % Красная строка
+
+
+%\usetikzlibrary{datavisualization}
+%\usetikzlibrary{datavisualization.formats.functions}
+
 \usepackage{amsmath}
+
+
+% Для листинга кода:
+\lstset{ %
+language=caml,                 % выбор языка для подсветки (здесь это С)
+basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
+numbers=left,               % где поставить нумерацию строк (слева\справа)
+numberstyle=\tiny,           % размер шрифта для номеров строк
+stepnumber=1,                   % размер шага между двумя номерами строк
+numbersep=5pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+showspaces=false,            % показывать или нет пробелы специальными отступами
+showstringspaces=false,      % показывать или нет пробелы в строках
+showtabs=false,             % показывать или нет табуляцию в строках
+frame=single,              % рисовать рамку вокруг кода
+tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+breaklines=true,           % автоматически переносить строки (да\нет)
+breakatwhitespace=false, % переносить строки только если есть пробел
+escapeinside={\#*}{*)}   % если нужно добавить комментарии в коде
+}
+
 \usepackage[left=2cm,right=2cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.9}
 
+% plot
+\usepackage{pgfplots}
 \usepackage{filecontents}
 \usetikzlibrary{datavisualization}
 \usetikzlibrary{datavisualization.formats.functions}
-
-\lstset{ %
-	language=caml,                 % выбор языка для подсветки (здесь это С)
-	basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
-	numbers=left,               % где поставить нумерацию строк (слева\справа)
-	numberstyle=\tiny,           % размер шрифта для номеров строк
-	stepnumber=1,                   % размер шага между двумя номерами строк
-	numbersep=5pt,                % как далеко отстоят номера строк от подсвечиваемого кода
-	showspaces=false,            % показывать или нет пробелы специальными отступами
-	showstringspaces=false,      % показывать или нет пробелы в строках
-	showtabs=false,             % показывать или нет табуляцию в строках
-	frame=single,              % рисовать рамку вокруг кода
-	tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
-	captionpos=b,              % позиция заголовка вверху [t] или внизу [b] 
-	breaklines=true,           % автоматически переносить строки (да\нет)
-	breakatwhitespace=false, % переносить строки только если есть пробел
-	escapeinside={\#*}{*)}   % если нужно добавить комментарии в коде
-}
 
 \graphicspath{ {img/} }
 
