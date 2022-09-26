@@ -10,11 +10,6 @@
 #define INF 100000000
 #define DEFAULT_C 'c'
 #define DEFAULT_D 2.5
-#define INC 1
-#define DEC 0
-#define EPS 1e-7
-
-//4 2 9 2 5
 
 typedef struct {
     int val;

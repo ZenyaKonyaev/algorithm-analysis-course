@@ -7,6 +7,10 @@
 #include "math.h"
 #include "stdlib.h"
 
+#define INC 1
+#define DEC 0
+#define EPS 1e-7
+
 void compare(sortElem *arr, size_t i, size_t j, int d)
 {
     if (d == comparatorIncrease(arr + i , arr + j))
