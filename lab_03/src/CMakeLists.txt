@@ -4,4 +4,6 @@ project(src C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(src
-        main.c)
+        main.c combSort.h bitonicSort.h bucketSort.h structs.h functions.h bitonicSort.c bucketSort.c combSort.c functions.c structs.c)
+
+target_link_libraries(src m)
