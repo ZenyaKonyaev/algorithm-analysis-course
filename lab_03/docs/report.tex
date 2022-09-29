@@ -12,6 +12,7 @@
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{fixltx2e}
+\usepackage{float}
 
 \frenchspacing
 
@@ -156,11 +157,11 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 	Карманная (блочная, корзинная) сортировка  — это сортировка, в ходе которой элементы, которые необходимо отсортировать, распределяются между конечным числом отдельных блоков (карманов) так, чтобы все элементы в каждом следующем по порядку блоке были всегда больше (или меньше, в зависимости от возрастания/убывания), чем в предыдущем. После этого каждый блок сортируется отдельно с помощью какого-либо алгоритма сортировки, либо соритруется рекурсивно карманной сортировкой. После этого элементы из полученных блоков по порядку помещаются обратно в массив, в результате чего получается отсоритрованные по возрастанию/убыванию входные данные.
 
 	
-	\section{Сортировка выбором}
+	\section{Битонная сортировка}
 	
-	Идея данного метода сортировки состоит в том, чтобы создавать отсортированную последовательность путем присоединения к ней одного элемента за другим в правильном порядке. Можно строить готовую последовательность, начиная с левого конца массива. Алгоритм состоит из n последовательных шагов. На очередном шаге выбираем наименьший из элементов, начинаю текущим и заканчивая последним, и меняем его местами с очередным элементом.
+	Битонная сортировка — это алгоритм сортировки, который часто используется в параллельных сортировках, так элементы сравниваются в предопределенной последовательности, которая не зависит от входных данных. Эта предопределенная последовательность называется битонной последовательностью. Битонная последовательность - это последовательность, в которой элементы сначала неубывают, а потом с определенного элемента невозрастают.
 	
-	Таким образом, на последнем шаге вся последовательность, кроме последнего элемента оказывается отсортированной, а последний элемент в свою очередь стоит на последнем месте корректно потому, что все меньшие элементы уже ушли влево.
+	На первом этапе соритровки необходимо создать битонную последовательность из заданной случайной последовательности сортируемых элементов (например, отсортировать элементы по возрастанию, а затем, начиная с середины последовательности, развернуть элементы в обратном порядке). Далее необходимо поменять местами элементы между двумя половинами последовательности, если какой-либо элемент во второй половине окажется меньше. Таким образом мы получили все элементы в первой половине меньше, чем все элементы во второй половине. Результаты сравнения и обмена в две последовательности длиной $N/2$ каждая, где N - кол-во элементов в последовательности. Далее необходимо повторять процесс обмена рекурсивно для каждой половины последовательности пока не получим одну отсортированную последовательность длины $N$.
 	
 	\section{Вывод}
 	
@@ -284,56 +285,56 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 	
 	На рисунках ниже показаны схемы алгоритмов карманной сортировки, расческой и битонной соответственно.
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\linewidth]{bucket_1}
+		\includegraphics[width=0.3\linewidth]{bucket_1}
 		\caption{Схема карманной сортировки ч.1}
 		\label{fig:schema_bucket_1}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\linewidth]{bucket_2}
 		\caption{Схема карманной сортировки ч.2}
 		\label{fig:schema_bucket_2}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics{bucket_3}
 		\caption{Схема карманной сортировки ч.3}
 		\label{fig:schema_bucket_3}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\linewidth]{combSort_1}
 		\caption{Схема сортировки расческой ч.1}
 		\label{fig:schema_selection}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics{combSort_2}
 		\caption{Схема сортировки расческой ч.2}
 		\label{fig:schema_selection}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics{bitonic_1}
 		\caption{Схема основной функции алгоритма битонной сортировки}
 		\label{fig:schema_insertion}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.9\linewidth]{bitonic_2}
 		\caption{Схема процедуры bitSortRec алгоритма битонной сортировки}
 		\label{fig:schema_insertion}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\linewidth]{bitonic_3}
 		\caption{Схема процедуры bitConnect алгоритма битонной сортировки}
@@ -371,53 +372,112 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 		
 	\section{Листинги кода}
 	
-	В листингах \ref{bubble-code},\ref{selection-code},\ref{insertion-code} приведены листинги алгоритмов сортировок пузырьком, выбором и вставками соответсвенно.
+	В листингах \ref{bubble-code},\ref{selection-code},\ref{insertion-code} приведены листинги алгоритмов карманной, битонной сортировок и сортировки расческой  соответсвенно.
 	
-	\begin{lstlisting}[label=bubble-code,caption=Функция сортировки массива пузырьком,language=C]
-		void bubbleSort(int *arr, size_t n)
+	\begin{lstlisting}[label=bubble-code,caption=Листинг карманной сортировки,language=C]
+		void pushBackBucket(bucket *b, sortElem *e)
 		{
-			for (int i = 0; i < n - 1; ++i)
-			for (int j = 0; j < n - 1 - i; ++j) {
-				if (arr[j] > arr[j + 1])
-				{
-					int tmp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = tmp;
-				}
-			}
+		    b->arr[b->len] = *e;
+		    (b->len)++;
+		}
+
+		void bucketSort(sortElem *arr, size_t n)
+		{
+		    if (n < 2)
+			return clock() - timeStart;
+
+		    sortElem min = { INF, DEFAULT_C, DEFAULT_D };
+		    sortElem max = { -INF, DEFAULT_C, DEFAULT_D };
+		    for (size_t i = 0; i < n; ++i) {
+			if (comparatorIncrease(&max, arr + i))
+			    max = arr[i];
+			if (comparatorIncrease(arr + i, &min))
+			    min = arr[i];
+		    }
+
+		    double range = (max.val) - min.val;
+		    double lengthBucket = range / nBus;
+
+		    for (size_t i = 0; i < n; ++i) {
+			size_t idxBucket = (int)((arr[i].val - min.val) / lengthBucket);
+			idxBucket = idxBucket >= nBus ? idxBucket - 1 : idxBucket;
+			pushBackBucket(arrB + idxBucket, arr + i);
+		    }
+
+		    for (size_t i = 0; i < nBus; ++i)
+			qsort(arrB[i].arr, arrB[i].len, sizeof(sortElem), comparatorIncrease);
+
+		    size_t idx = 0;
+		    for (size_t i = 0; i < nBus; ++i)
+			for (size_t j = 0; j < arrB[i].len; ++j)
+			    arr[idx++] = arrB[i].arr[j];
 		}
 	\end{lstlisting}
 
 	
-	\begin{lstlisting}[label=selection-code,caption=Функция сортировки массива выбором,language=C]
-		void selectionSort(int *arr, size_t n)
+	\begin{lstlisting}[label=selection-code,caption=Листинг битонной сортировки,language=C]
+		void compare(sortElem *arr, size_t i, size_t j, int d)
 		{
-			for (int i = 0; i < n; ++i) {
-				int idxToSwap = 0;
-				for (int j = 0; j < n - i; ++j) {
-					if (arr[idxToSwap] < arr[j]) {
-						idxToSwap = j;
-					}
-				}
-				int tmp = arr[idxToSwap];
-				arr[idxToSwap] = arr[n - i - 1];
-				arr[n - i - 1] = tmp;
-			}
+		    if (d == comparatorIncrease(arr + i , arr + j))
+		    {
+			sortElem tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+		    }
+		}
+
+		void bitonicConnect(sortElem* arr, size_t lo, size_t n, int d)
+		{
+		    if (n < 2)
+			return;
+
+		    size_t m = n / 2;
+		    for (size_t i = lo; i < lo + m; ++i)
+		    {
+			compare(arr, i, i + m, d);
+		    }
+		    bitonicConnect(arr, lo, m, d);
+		    bitonicConnect(arr, lo + m, m, d);
+		}
+
+		void bitonicSortRecursive(sortElem *arr, size_t lo, size_t n, int dir)
+		{
+		    if (n < 2)
+			return;
+
+		    size_t m = n / 2;
+		    bitonicSortRecursive(arr, lo, m, INC);
+		    bitonicSortRecursive(arr, lo + m, m, DEC);
+		    bitonicConnect(arr,lo, n, dir);
+		}
+
+		void bitonicSort(sortElem *arr, size_t n)
+		{
+		    bitonicSortRecursive(arr, 0, n, INC);
 		}
 	\end{lstlisting}
+	
+	\bigbreak
 
-	\begin{lstlisting}[label=insertion-code,caption=Функция сортировки массива вставками,language=C]
-		int insertionSort(int *arr, size_t n)
+	\begin{lstlisting}[label=insertion-code,caption=Листинг сортировки расческой,language=C]
+		void combSort(sortElem *arr, size_t n)
 		{
-			for (int i = 0; i < n; ++i) {
-				int idxInsert = i;
-				int insertElement = arr[i];
-				for (int j = i; j > 0 && arr[j - 1] > insertElement; --j) {
-					arr[j] = arr[j - 1];
-					idxInsert = j - 1;
-				}
-				arr[idxInsert] = insertElement;
+		    float factor = 1.247f;
+		    size_t gap = (size_t)(n / factor);
+		    int swapped = 1;
+		    while (gap != 1 || swapped) {
+			swapped = 0;
+			for(size_t i = 0, j = gap; j < n; ++i, ++j)
+			{
+			    if (comparatorIncrease(arr + i, arr + j)) {
+				sortElem tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+				swapped = 1;
+			    }
 			}
+			gap = gap / factor < 1 ? 1 : gap / factor;
+		    }
 		}
 	\end{lstlisting}
 
@@ -444,7 +504,7 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 
 	\section{Вывод}
 	
-	В данном разделе были разработаны исходные коды трёх алгоритмов сортировки: пузырьком, выбором и вставками.
+	В данном разделе были разработаны исходные коды трёх алгоритмов сортировок: расческой, битонной и карманной.
 	
 	\chapter{Экспериментальная часть}
 	
@@ -453,9 +513,9 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 	Ниже приведены технические характеристики устройства, на котором было проведено тестирование ПО:
 	
 	\begin{enumerate}
-		\item Операционная система: Windows-10, 64-bit.
-		\item Оперативная память: 16 GB.
-		\item Процессор: Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz, 1992 МГц, 4 ядра, 8 логических процессоров
+		\item Операционная система: Windows-10, 64-bit;
+		\item Оперативная память: 16 GB;
+		\item Процессор: Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz, 1992 МГц, 4 ядра, 8 логических процессоров.
 		
 		
 	\end{enumerate}
@@ -469,19 +529,19 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 				
 				\hline
 				
-				Размер & bubble & selection & insertion  \\ [0.5ex]
+				Размер & comb & bucket & bitonic  \\ [0.5ex]
 				
 				\hline
 				
-				100 & 0.02 & 0.02 & 0 \\ 
+				100 & 7.8 & 7.61 & 27.3 \\ 
 				
 				\hline 
 				
-				1000 & 1.02 & 1.26 & 0 \\ 
+				1000 & 113 & 100.4 & 428.1 \\ 
 				
 				\hline 
 				
-				10000 & 102.5 & 117.5 & 0 \\ 
+				10000 & 1750 & 801.57 & 12427.6 \\ 
 				
 				\hline 
 			\end{tabular}
@@ -496,24 +556,24 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 					xmin = 0,
 					ymin = 0, 
 					xmax = 10000,
-					ymax = 120,
+					ymax = 13000,
 					xlabel = $\text{кол-во элементов}$,
 					ylabel = $\text{время (мс)}$,
 					title=$\text{График зависимости времени сортировок от кол-ва элементов на упорядоченном массиве}$
 					]
 					\legend{ 
-						$bubble$, 
-						$selection$, 
-						$insertion$
+						$comb$, 
+						$bucket$, 
+						$bitonic$
 					};
 					\addplot coordinates {
-						(100,0.02) (1000,1.02) (10000,102.5)
+						(100,7.08) (1000,113) (10000,1750)
 					};
 					\addplot coordinates {
-						(100,0.02) (1000,1.26) (10000,117.5)
+						(100,7.61) (1000,100.4) (10000,801.57)
 					};
 					\addplot coordinates {
-						(100,0.00) (1000,0) (10000,0)
+						(100,27.3) (1000,428.1) (10000,12427.6)
 					};
 				\end{axis}
 		\end{tikzpicture}
@@ -526,19 +586,19 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 				
 				\hline
 				
-				Размер & bubble & selection & insertion  \\ [0.5ex]
+				Размер & comb & bucket & bitonic  \\ [0.5ex]
 				
 				\hline
 				
-				100 & 0.02 & 0.02 & 0.02 \\ 
+				100 & 9.6 & 7.71 & 28.49 \\ 
 				
 				\hline 
 				
-				1000 & 1.94 & 1.04 & 1.48 \\ 
+				1000 & 130.27 & 96.4 & 390.85 \\ 
 				
 				\hline 
 				
-				10000 & 187.8 & 103.3 & 139.9 \\ 
+				10000 & 2066.09 & 888.5 & 11475.05 \\ 
 				
 				\hline 
 				
@@ -554,55 +614,56 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 				xmin = 0,
 				ymin = 0, 
 				xmax = 10000,
-				ymax = 120,
+				ymax = 13000,
 				xlabel = $\text{кол-во элементов}$,
 				ylabel = $\text{время (мс)}$,
 				title=$\text{График зависимости времени сортировок от кол-ва элементов на обратно упорядоченном массиве}$
 				]
 				\legend{ 
-					$bubble$, 
-					$selection$, 
-					$insertion$
+					$comb$, 
+					$bucket$, 
+					$bitonic$
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,1.94) (10000,187.8)
+					(100,9.6) (1000,130.27) (10000,2066.09)
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,1.04) (10000,103.3)
+					(100,7.71) (1000,96.4) (10000,888.5)
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,1.48) (10000,139.9)
+					(100,28.49) (1000,390.85) (10000,11475.05)
 				};
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 	
 	\begin{table} [h!]
-		\caption{Таблица времени выполнения сортировок на случайных данных (в мс)}
+		\caption{Таблица времени выполнения сортировок на случайных данных (от 0 до 1000) (в мс)}
 		\begin{center}
 			\begin{tabular}{|c | c | c | c|}
 				
 				\hline
 				
-				Размер & bubble & selection & insertion  \\ [0.5ex]
+				Размер & comb & bucket & bitonic  \\ [0.5ex]
 				
 				\hline
 				
-				100 & 0.02 & 0.02 & 0.02 \\ 
+				100 & 12.38 & 12.78 & 39.79 \\ 
 				
 				\hline 
 				
-				1000 & 2.02 & 0.96 & 0.72 \\ 
+				1000 & 189.44 & 189.77 & 486.02 \\ 
 				
 				\hline 
 				
-				10000 & 229.1 & 86.8 & 69.4 \\ 
+				10000 & 2491.19 & 1975.79 & 12273.07 \\ 
 				
 				\hline 
 				
 			\end{tabular}
 		\end{center}
 	\end{table}
+
 
 	\begin{center}
 		\begin{tikzpicture}
@@ -612,28 +673,87 @@ escapeinside={\#*}{*)}   % если нужно добавить коммента
 				xmin = 0,
 				ymin = 0, 
 				xmax = 10000,
-				ymax = 120,
+				ymax = 13000,
 				xlabel = $\text{кол-во элементов}$,
 				ylabel = $\text{время (мс)}$,
 				title=$\text{График зависимости времени сортировок от кол-ва элементов на массиве случайных чисел}$
 				]
 				\legend{ 
-					$bubble$, 
-					$selection$, 
-					$insertion$
+					$comb$, 
+					$bucket$, 
+					$bitonic$
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,2.02) (10000,229.1)
+					(100,12.38) (1000,189.44) (10000,2491.19)
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,0.96) (10000,86.8)
+					(100,12.78) (1000,189.77) (10000,1975.79)
 				};
 				\addplot coordinates {
-					(100,0.02) (1000,0.72) (10000,69.4)
+					(100,39.79) (1000,486.02) (10000,12273.07)
 				};
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
+	
+	\begin{table} [h!]
+		\caption{Таблица времени выполнения сортировок на случайных данных (от 0 до 3) (в мс)}
+		\begin{center}
+			\begin{tabular}{|c | c | c | c|}
+				
+				\hline
+				
+				Размер & comb & bucket & bitonic  \\ [0.5ex]
+				
+				\hline
+				
+				100 & 8.89 & 8.08 & 31.94 \\ 
+				
+				\hline 
+				
+				1000 & 100.6 & 100.66 & 405.61 \\ 
+				
+				\hline 
+				
+				10000 & 1763.35 & 1286.04 & 11061.61 \\ 
+				
+				\hline 
+				
+			\end{tabular}
+		\end{center}
+	\end{table}
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis} [
+				legend pos = north west,
+				grid = major,
+				xmin = 0,
+				ymin = 0, 
+				xmax = 10000,
+				ymax = 13000,
+				xlabel = $\text{кол-во элементов}$,
+				ylabel = $\text{время (мс)}$,
+				title=$\text{График зависимости времени сортировок от кол-ва элементов на массиве случайных чисел}$
+				]
+				\legend{ 
+					$comb$, 
+					$bucket$, 
+					$bitonic$
+				};
+				\addplot coordinates {
+					(100,8.89) (1000,100.6) (10000,1763.35)
+				};
+				\addplot coordinates {
+					(100,8.08) (1000,100.66) (10000,1286.04)
+				};
+				\addplot coordinates {
+					(100,31.94) (1000,405.61) (10000,11061.61)
+				};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	
 
 	\section{Вывод}
 	
