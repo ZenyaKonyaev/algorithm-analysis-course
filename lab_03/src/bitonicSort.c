@@ -84,10 +84,10 @@ void shrinkToLen(sortElem **arr, size_t *curLen, size_t lenToShrink)
     *curLen = lenToShrink;
 }
 
-int bitonicSort(sortElem *arr, size_t len)
+int bitonicSort(sortElem *arr, size_t n)
 {
     clock_t timeStart = clock();
-    bitonicSortRecursive(arr, 0, len, INC);
+    bitonicSortRecursive(arr, 0, n, INC);
 
     return clock() - timeStart;
 }
