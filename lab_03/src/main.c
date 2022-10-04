@@ -9,11 +9,15 @@ int main()
     do {
         printStartMenu();
 
-        scanf("%d", &action);
+        if (scanf("%d", &action) != 1) {
+            printerError(ERROR_INPUT_ACTION);
+            return ERROR_INPUT_ACTION;
+        }
 
+        int error = 0;
         switch (action) {
             case 1:
-                actionSort();
+                error = actionSort();
                 break;
             case 2:
                 actionCharacteristicsSort();
@@ -23,6 +27,11 @@ int main()
             default:
                 printf("Error, there are no such action");
                 break;
+        }
+
+        if (error) {
+            printerError(error);
+            return error;
         }
 
     } while (action != 3);

@@ -11,6 +11,12 @@
 #define DEFAULT_C 'c'
 #define DEFAULT_D 2.5
 
+// ERRORS
+
+#define ERROR_INPUT_ACTION 1
+#define ERROR_SIZE_ARRAY 2
+#define ERROR_INPUT_ELEMENT_ARRAY 3
+
 typedef struct {
     int val;
     char c;

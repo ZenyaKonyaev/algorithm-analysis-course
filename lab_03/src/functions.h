@@ -8,6 +8,7 @@
 #include "structs.h"
 
 void printStartMenu();
-void actionSort();
+int actionSort();
+void printerError(int codeError);
 
 #endif //SRC_FUNCTIONS_H
