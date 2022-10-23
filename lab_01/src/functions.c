@@ -40,6 +40,13 @@ int error_handler(int error_code)
         case ERROR_SELECT_ACTION_MAIN_MENU:
             printf("Action must be integer between 1 and 3!\n");
             break;
+        case ERROR_SELECT_TYPE_ALG:
+            printf("Type arg must be integer between 1 and 4!\n");
+            break;
+        case ERROR_SCAN_STR:
+            printf("Something goes wrong in scan string!\n");
+        case ERROR_LEN_STR:
+            printf("Length of str must be less, than %d!\n", MAX_STR_LEN);
         default:
             printf("Unknown error!\n");
             break;
